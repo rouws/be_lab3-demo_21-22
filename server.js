@@ -56,7 +56,7 @@ app.use(express.static('public'))
 /*****************************************************
  * Set template engine
  ****************************************************/
-
+app.set('view engine', 'ejs');
 
 
 /*****************************************************
@@ -67,48 +67,19 @@ app.use(express.static('public'))
  ****************************************************/
 
 
-app.get('/', (req, res) => {
-    let doc = '<!doctype html>';
-    doc += '<title>Movies</title>'
-    doc += '<h1>Movies</h1>'
-
-    movies.forEach(movie => {
-        doc += "<section>";
-        doc += `<h2>${movie.name}</h2>`;
-        doc += `<h3>${movie.year}</h3>`;
-        doc += "<h3>Categories:</h3>";
-        doc += "<ul>";
-        movie.categories.forEach(category => {
-            doc += `<li>${category}</li>`;
-        });
-        doc += "</ul>";
-        doc += `<a href="/movies/${movie.id}/${movie.slug}">more info</a>`
-        doc += "</section>";
-    });
-    res.send(doc);
+app.get('/',  (req, res) => {
+    // RENDER PAGE
+    const title  = (movies.length == 0) ? "No movies were found" : "Movies";
+    res.render('movielist', {title, movies});
 })
 
 app.get('/movies/:id/:slug', (req, res) => {
+    // FIND MOVIE
     const id = req.params.id
     const movie = movies.find(element => element.id == id)
-    console.log(id)
+    console.log(movie)
     // RENDER PAGE
-    let doc = '<!doctype html>';
-    doc += `<title>Movie details for ${movie.name}</title>`;
-    doc += `<h1>${movie.name}</h1>`;
-    doc += `<h2>${movie.year}</h2>`;
-    doc += "<h2>Categories</h2>";
-    doc += "<ul>";
-    movie.categories.forEach( category => {
-        doc += `<li>${category}</li>`;
-    })
-    doc += "</ul>";
-    doc += `<p>${movie.storyline}</p>`;
-    
-    res.send(doc);
-
-
-
+    res.render('moviedetails', {title: `Moviedetails for ${movie.name}`, movie});
 })
 
 
