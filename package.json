@@ -1,7 +1,7 @@
 {
-  "name": "be_lab2-demo_21-22",
+  "name": "be_lab3-demo_21-22",
   "version": "1.0.0",
-  "description": "live demo lab 2",
+  "description": "live demo lab 3",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -9,18 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rouws/be_lab2-demo_21-22.git"
+    "url": "git+https://github.com/rouws/be_lab3-demo_21-22.git"
   },
   "keywords": [
     "express",
-    "routing"
+    "routing",
+    "template engine",
+    "forms"
   ],
   "author": "sonja Rouwhorst",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rouws/be_lab2-demo_21-22/issues"
+    "url": "https://github.com/rouws/be_lab3-demo_21-22/issues"
   },
-  "homepage": "https://github.com/rouws/be_lab2-demo_21-22#readme",
+  "homepage": "https://github.com/rouws/be_lab3-demo_21-22#readme",
   "dependencies": {
     "express": "^4.17.2"
   },
