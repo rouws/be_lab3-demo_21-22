@@ -1,5 +1,7 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
+const slug = require('slug');
+const arrayBack = require('array-back');
 
 /*****************************************************
  * Define some constants and variables
@@ -93,13 +95,20 @@ app.get('/movies/add',  (req, res) => {
     res.render('addmovie', {title, categories});
 })
 
-app.post('/ditistijdelijk', (req, res) => {
-        console.log(req.body.eenvariabele);
+app.post('/movies/add', (req, res) => {
+        // make movie object
+        // TODO add a unique ID
         const movie = {
-                name: req.body.moviename
+                slug: slug(req.body.name),
+                name: req.body.name,
+                year: req.body.year,
+                categories: arrayBack(req.body.categories),
+                storyline: req.body.storyline
         }
-        //movies.push(movie)
-        title = "Het is gelukt!"
+        // ADD MOVIE
+        movies.push(movie)
+        // RENDER PAGE
+        title = "Succesfully added the movie!"
         res.render('movielist', {title, movies});
 })
 
