@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
  ****************************************************/
 const app = express();
 const port = 3000;
+const categories = ["action", "adventure", "sci-fi", "animation", "horror", "thriller", "fantasy", "mystery", "comedy", "family"];
 const movies = [
         {
                 "id": 1,
@@ -89,7 +90,7 @@ app.get('/movies/:id/:slug', (req, res) => {
 app.get('/movies/add',  (req, res) => {
     // RENDER PAGE
     const title  = "Add a new movie";
-    res.render('addmovie', {title});
+    res.render('addmovie', {title, categories});
 })
 
 app.post('/ditistijdelijk', (req, res) => {
@@ -97,7 +98,7 @@ app.post('/ditistijdelijk', (req, res) => {
         const movie = {
                 name: req.body.moviename
         }
-        movies.push(movie)
+        //movies.push(movie)
         title = "Het is gelukt!"
         res.render('movielist', {title, movies});
 })
