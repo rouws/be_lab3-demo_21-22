@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 
 /*****************************************************
  * Define some constants and variables
@@ -52,6 +53,8 @@ const movies = [
  * Middleware
  ****************************************************/
 app.use(express.static('public'))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded( {extended: true}))
 
 /*****************************************************
  * Set template engine
@@ -82,6 +85,22 @@ app.get('/movies/:id/:slug', (req, res) => {
     res.render('moviedetails', {title: `Moviedetails for ${movie.name}`, movie});
 })
 
+
+app.get('/movies/add',  (req, res) => {
+    // RENDER PAGE
+    const title  = "Add a new movie";
+    res.render('addmovie', {title});
+})
+
+app.post('/ditistijdelijk', (req, res) => {
+        console.log(req.body.eenvariabele);
+        const movie = {
+                name: req.body.moviename
+        }
+        movies.push(movie)
+        title = "Het is gelukt!"
+        res.render('movielist', {title, movies});
+})
 
 /*****************************************************
  * If no routes give response, show 404 Page
